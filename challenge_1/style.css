@@ -7,16 +7,17 @@ List styles
 
 .row1 li, .row2 li, .row3 li {
   display: inline;
-  margin: 20px;
   padding: 10px;
-  border-top: 1px solid black;
   border-right: 1px solid black;
   border-left: 1px solid black;
+  border-top: 1px solid black;
+  margin: 0px 20px;
 }
 
 .row3 li {
   border-bottom: 1px solid black;
 }
+
 
 .playTable {
   list-style-type: none;
