@@ -1,16 +1,69 @@
-const Board = [['1A', '1B', '1C'], ['2A', '2B', '2C'], ['3A', '3B', '3C']];
-let playBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+let size = Number(window.prompt('Choose size of board'));
 let gameFinish = false;
 let player1Player2 = true;
 
+
+/*
+==========
+Board Builder
+==========
+*/
+
+function makeBoard(big) {
+  let playBoard = [];
+  for (let row = 0; row < big; row++) {
+    playBoard[row] = [];
+    for (let col = 0; col < big; col++) {
+      playBoard[row].push(0);
+    }
+  }
+  return playBoard;
+}
+
+let playBoard = makeBoard(size);
+
+
+function makeDOMBoard(big) {
+  let dOMBoard = [];
+  let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for (let row = 1; row <= big; row++) {
+    dOMBoard[row] = [];
+    for (let c = 0; c < big; c++) {
+      let id = row + chars.charAt(c);
+      dOMBoard[row].push(id);
+    }
+  }
+  return dOMBoard;
+}
+
+let board = makeDOMBoard(size);
+
+// function buildDOMBoard() {
+//   let table = document.createElement("table");
+//   for (let row = 0; row < board.length; row++) {
+//     let row = document.createElement("tr");
+//     for (let col = 0; col < board[row].length; col++) {
+//       let slot = document.createElement("td");
+//       let text = document.createTextNode("-");
+//       slot.id = board[row][col];
+//       slot.appendChild(text);
+//       row.appendChild(slot);
+//     }
+//     table.appendChild(row);
+//   }
+//   document.getElementsByTagName("div").appendChild(table);
+// }
+
+
+
 //Reset Board
 document.getElementById("reset").onclick = function() {
-  Board.forEach((row) => {
+  board.forEach((row) => {
     row.forEach((position) => {
       document.getElementById(position).innerHTML = '-';
     })
   })
-  playBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+  playBoard = makeBoard(size);
   player1Player2 = true;
   gameFinish = false;
 }
@@ -32,10 +85,10 @@ document.addEventListener('click', (event) => {
     let row;
     let column;
     
-    for (let i = 0; i < Board.length; i++) {
-      if (Board[i].indexOf(id) !== -1) {
+    for (let i = 0; i < board.length; i++) {
+      if (board[i].indexOf(id) !== -1) {
         row = i;
-        column = Board[i].indexOf(id);
+        column = board[i].indexOf(id);
       }
     }
   
@@ -139,7 +192,7 @@ const topLefttoBotRightDiag = () => {
 const topRighttoBotLeftDiag = () => {
   let player1 = 0;
   let player2 = 0;
-  let j = 2;
+  let j = playBoard.length - 1;
 
   for (let i = 0; i < playBoard.length; i++) {
     if (playBoard[i][j]=== 1) {
@@ -163,7 +216,7 @@ const tie = () => {
         }
       })
     })
-    if (count === 9) {
+    if (count === (size*size)) {
       alert('No one won sadface :(');
     }
   }
