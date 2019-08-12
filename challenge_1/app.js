@@ -1,6 +1,7 @@
 const Board = [['1A', '1B', '1C'], ['2A', '2B', '2C'], ['3A', '3B', '3C']];
 let playBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
 let gameFinish = false;
+let player1Player2 = true;
 
 //Reset Board
 document.getElementById("reset").onclick = function() {
@@ -18,32 +19,39 @@ document.getElementById("reset").onclick = function() {
 
 /* 
 ==========
-Toggle Pieces
+Add eventListener to Pieces
 ==========
 */
 
 
-let player1Player2 = true;
 
-(function (){
-  Board.forEach((row, rowInd) => {
-    row.forEach((position, colInd) => {
-      document.getElementById(position).addEventListener('click', function(event) {
-        if (document.getElementById(position).innerHTML !== 'x' && document.getElementById(position).innerHTML !== 'o') {
-          if (player1Player2) {
-            document.getElementById(position).innerHTML = 'x';
-            playBoard[rowInd][colInd] = 1;
-          } else {
-            document.getElementById(position).innerHTML = 'o';
-            playBoard[rowInd][colInd] = 2;
-          }
-        }
-        player1Player2 = !player1Player2;
-        checkWin();
-      })
-    })
-  })
-})();
+document.addEventListener('click', (event) => {
+  let id = event.target.id;
+  
+  if (id !== 'reset') {
+    let row;
+    let column;
+    
+    for (let i = 0; i < Board.length; i++) {
+      if (Board[i].indexOf(id) !== -1) {
+        row = i;
+        column = Board[i].indexOf(id);
+      }
+    }
+  
+    if (document.getElementById(id).innerHTML !== 'x' && document.getElementById(id).innerHTML !== 'o') {
+      if (player1Player2) {
+        document.getElementById(id).innerHTML = 'x';
+        playBoard[row][column] = 1;
+      } else {
+        document.getElementById(id).innerHTML = 'o';
+        playBoard[row][column] = 2;
+      }
+    }
+    player1Player2 = !player1Player2;
+    checkWin();
+  }
+})
 
 /* 
 ==========
