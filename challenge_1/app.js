@@ -19,7 +19,9 @@ let player1Player2 = true;
   board.forEach((row) => {
     row.forEach((position) => {
       document.getElementById(position).addEventListener('click', function(event) {
-        if (event.target.value === '') {
+        
+        if (document.getElementById(position).innerHTML === '') {
+          console.log('yes');
           if (player1Player2) {
             document.getElementById(position).innerHTML = 'x';
           } else {
