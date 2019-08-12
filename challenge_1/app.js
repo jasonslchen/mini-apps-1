@@ -1,15 +1,17 @@
-let board = [['1A', '1B', '1C'], ['2A', '2B', '2C'], ['3A', '3B', '3C']];
+const Board = [['1A', '1B', '1C'], ['2A', '2B', '2C'], ['3A', '3B', '3C']];
 let playBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
+let gameFinish = false;
 
 //Reset Board
 document.getElementById("reset").onclick = function() {
-  board.forEach((row) => {
+  Board.forEach((row) => {
     row.forEach((position) => {
       document.getElementById(position).innerHTML = '-';
     })
   })
   playBoard = [[0, 0, 0], [0, 0, 0], [0, 0, 0]];
   player1Player2 = true;
+  gameFinish = false;
 }
 
 
@@ -24,10 +26,10 @@ Toggle Pieces
 let player1Player2 = true;
 
 (function (){
-  board.forEach((row, rowInd) => {
+  Board.forEach((row, rowInd) => {
     row.forEach((position, colInd) => {
       document.getElementById(position).addEventListener('click', function(event) {
-        if (document.getElementById(position).innerHTML !== 'x' || document.getElementById(position).innerHTML !== 'o') {
+        if (document.getElementById(position).innerHTML !== 'x' && document.getElementById(position).innerHTML !== 'o') {
           if (player1Player2) {
             document.getElementById(position).innerHTML = 'x';
             playBoard[rowInd][colInd] = 1;
@@ -54,6 +56,7 @@ const checkWin = () => {
   verticalWin();
   topLefttoBotRightDiag();
   topRighttoBotLeftDiag();
+  tie();
 }
 
 const winAnnouncment = (winMethod, player) => {
@@ -62,9 +65,11 @@ const winAnnouncment = (winMethod, player) => {
 
 const checkWinner = (player1, player2, method) => {
   if (player1 === 3) {
+    gameFinish = true;
     winAnnouncment(method, '1');
     return;
   } else if (player2 === 3) {
+    gameFinish = true;
     winAnnouncment(method, '2');
     return;
   }
@@ -91,7 +96,6 @@ const horizontalWin = () => {
 //vertical column win
 
 const verticalWin = () => {
-  
   for (let row = 0; row < playBoard.length; row++) {
     let player1 = 0;
     let player2 = 0;
@@ -137,12 +141,25 @@ const topRighttoBotLeftDiag = () => {
     }
     j--;
   }
-  
   checkWinner(player1, player2, 'Top Right to Bottom Left Diagonal');
 }
 
 
-
+const tie = () => {
+  if (!gameFinish) {
+    let count = 0;
+    playBoard.forEach((row) => {
+      row.forEach((slot) => {
+        if (slot === 1 || slot === 2) {
+          count++;
+        }
+      })
+    })
+    if (count === 9) {
+      alert('No one won sadface :(');
+    }
+  }
+}
 
 
 
