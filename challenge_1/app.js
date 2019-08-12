@@ -53,13 +53,22 @@ const checkWin = () => {
   horizontalWin();
   verticalWin();
   topLefttoBotRightDiag();
-  // topRighttoBotLeftDiag();
+  topRighttoBotLeftDiag();
 }
 
 const winAnnouncment = (winMethod, player) => {
-  alert(`Hurray Player${player} won with a ${winMethod} win!`)
+  alert(`Hurray Player ${player} won with a ${winMethod} win!`)
 }
 
+const checkWinner = (player1, player2, method) => {
+  if (player1 === 3) {
+    winAnnouncment(method, '1');
+    return;
+  } else if (player2 === 3) {
+    winAnnouncment(method, '2');
+    return;
+  }
+}
 
 //horizontal row win
 
@@ -74,13 +83,8 @@ const horizontalWin = () => {
         player2++;
       }
     })
-    if (player1 === 3) {
-      winAnnouncment('Horizontal', 'Player 1');
-      return;
-    } else if (player2 === 3) {
-      winAnnouncment('Horizonal', 'Player 2');
-      return;
-    }
+    
+    checkWinner(player1, player2, 'Horizontal');
   }
 }
 
@@ -99,13 +103,7 @@ const verticalWin = () => {
       }
       
     }
-    if (player1 === 3) {
-      winAnnouncment('Vertical', 'Player 1');
-      return;
-    } else if (player2 === 3) {
-      winAnnouncment('Vertical', 'Player 2');
-      return;
-    }
+    checkWinner(player1, player2, 'Vertical');
   }
 }
 
@@ -123,39 +121,25 @@ const topLefttoBotRightDiag = () => {
     }
   }
 
-  if (player1 === 3) {
-    winAnnouncment("Top Left to Bottom Right", "Player 1");
-    return;
-  } else if (player2 === 3) {
-    winAnnouncment("Top Left to Bottom Right", "Player 2");
-    return;
-  }
+  checkWinner(player1, player2, 'Top Left to Bottom Right Diagonal');
 }
 
-// const topRighttoBotLeftDiag = () => {
-//   let player1 = 0;
-//   let player2 = 0;
-  
-//   for (let i = 0; i < playBoard.length; i--) {
-//     if (playBoard[i]=== 1) {
-//       player1++;
-//     } else if (playBoard[i]=== 2) {
-//       player2++
-//     }
-//   }
+const topRighttoBotLeftDiag = () => {
+  let player1 = 0;
+  let player2 = 0;
+  let j = 2;
 
-//   console.log('board', playBoard);
-
-//   console.log('1', player1);
+  for (let i = 0; i < playBoard.length; i++) {
+    if (playBoard[i][j]=== 1) {
+      player1++;
+    } else if (playBoard[i][j]=== 2) {
+      player2++
+    }
+    j--;
+  }
   
-//   if (player1 === 3) {
-//     winAnnouncment("Top Right to Bottom Left", "Player 1");
-//     return;
-//   } else if (player2 === 3) {
-//     winAnnouncment("Top Right to Bottom Left", "Player 2");
-//     return;
-//   }
-// }
+  checkWinner(player1, player2, 'Top Right to Bottom Left Diagonal');
+}
 
 
 
