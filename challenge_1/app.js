@@ -1,6 +1,9 @@
 let size = Number(window.prompt('Choose size of board'));
 let gameFinish = false;
 let player1Player2 = true;
+let winner;
+let player1Score = 0;
+let player2Score = 0;
 
 
 /*
@@ -64,14 +67,24 @@ Reset Board
 ==========
 */
 
-document.getElementById("reset").onclick = function() {
+document.getElementById("reset").addEventListener('click', () => {
+  winnerChoice();
+  resetBoard();
+})  
+
+function winnerChoice() {
+  if (gameFinish) {
+    player1Player2 = winner;
+  }
+}
+
+function resetBoard() {
   board.forEach((row) => {
     row.forEach((position) => {
       document.getElementById(position).innerHTML = '-';
     })
   })
   playBoard = makeBoard(size);
-  player1Player2 = true;
   gameFinish = false;
 }
 
@@ -131,10 +144,18 @@ const winAnnouncment = (winMethod, player) => {
 const checkWinner = (player1, player2, method) => {
   if (player1 === size) {
     gameFinish = true;
+    winner = true;
+    player1Score++;
+    console.log('player1won');
+    document.getElementById("player1").innerHTML = player1Score;
     winAnnouncment(method, '1');
     return;
   } else if (player2 === size) {
     gameFinish = true;
+    winner = false;
+    player2Score++;
+    console.log('player2won');
+    document.getElementById("player2").innerHTML = player2Score;
     winAnnouncment(method, '2');
     return;
   }

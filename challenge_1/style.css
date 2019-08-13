@@ -5,21 +5,38 @@ List styles
 =====
 */
 
-table {
+#table table {
   border: 1px solid black;
   border-collapse: collapse;
 }
 
-td {
+#table td {
   padding: 20px;
 }
 
-table tr {
+#table table tr {
   border-bottom: 1px solid black;
 }
 
-table tr td {
+#table table tr td {
   border-right: 1px solid black;
 }
+
+#scoreboard {
+  margin-top: 20px;
+  border-collapse: collapse;
+  border: 1px solid black;
+  text-align: center;
+}
+
+#scoreboard th {
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+#scoreboard td {
+  border-right: 1px solid black;
+}
+
 
 
