@@ -39,16 +39,26 @@ app.post('/', (req, res) => {
   firstRow = firstRow.slice(0, firstRow.length - 1);
   resultsArr.unshift(firstRow.join(','));
 
-  let csvData = resultsArr.join('\n');
+  let csvData = resultsArr.join('<br>');
   
-  fs.writeFile('file.csv', csvData, (err) => {
+  // fs.writeFile('file.csv', csvData, (err) => {
+  //   if (err) {
+  //     res.status(500).send(err);
+  //   } else {
+  //     res.status(200).download('file.csv');
+  //   }
+  // })
+  
+  fs.readFile(__dirname + "/client/index.html", 'utf8', (err, file) => {
     if (err) {
-      console.log(err);
+      res.status(500).send(err);
+    } else {
+      csvData = `<div>${csvData}</div>`
+      let index = file.indexOf('</form>');
+      let newData = [file.slice(0, index), csvData, file.slice(index)].join('');
+      res.status(200).send(newData);
     }
-  })
-
-
-  res.status(200).send(csvData);
+  })  
 })
 
 
