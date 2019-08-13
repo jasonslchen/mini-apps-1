@@ -197,14 +197,14 @@ const checkWinner = (player1, player2, method) => {
     winner = true;
     player1Score++;
     document.getElementById("player1").innerHTML = player1Score;
-    winAnnouncment(method, '1');
+    winAnnouncment(method, `${player1Player}`);
     return;
   } else if (player2 === size) {
     gameFinish = true;
     winner = false;
     player2Score++;
     document.getElementById("player2").innerHTML = player2Score;
-    winAnnouncment(method, '2');
+    winAnnouncment(method, `${player2Player}`);
     return;
   }
 }
