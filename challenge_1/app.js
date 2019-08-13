@@ -1,4 +1,6 @@
 let size = Number(window.prompt('Choose size of board'));
+let player1Player = window.prompt('Name of Player 1');
+let player2Player = window.prompt('Name of Player 2');
 let gameFinish = false;
 let player1Player2 = true;
 let winner;
@@ -59,6 +61,53 @@ var board = makeDOMBoard(size);
   document.getElementById("table").appendChild(table);
 })();
 
+/*
+==========
+Build Scoreboard
+==========
+*/
+
+(function () {
+  let table = document.createElement("table");
+  table.id = "scoreboard";
+
+  let row1 = document.createElement("tr");
+  let player1head = document.createElement("th")
+  let text = document.createTextNode(`${player1Player} Score`);
+  player1head.appendChild(text);
+  
+  let player2head = document.createElement("th")
+  text = document.createTextNode(`${player2Player} Score`);
+  player2head.appendChild(text);
+
+  row1.appendChild(player1head);
+  row1.appendChild(player2head);
+
+  table.appendChild(row1);
+
+  let scoreRow = document.createElement("tr")
+
+  let play1 = document.createElement("td");
+  let play2 = document.createElement("td");
+  
+  play1.id = "player1";
+  play2.id = "player2";
+
+  
+  let intial = document.createTextNode(0);
+  let intial2 = document.createTextNode(0);
+  play1.appendChild(intial);
+  play2.appendChild(intial2);
+  
+  scoreRow.appendChild(play1);
+  scoreRow.appendChild(play2);
+  
+  table.appendChild(scoreRow);
+
+  document.getElementById("scoreboardPlace").appendChild(table);
+
+})();
+
 
 
 /*
@@ -89,6 +138,7 @@ function resetBoard() {
 }
 
 
+
 /* 
 ==========
 Single Event Listener
@@ -109,12 +159,12 @@ document.addEventListener('click', (event) => {
       }
     }
   
-    if (document.getElementById(id).innerHTML !== 'x' && document.getElementById(id).innerHTML !== 'o') {
+    if (document.getElementById(id).innerHTML !== `${player1Player}<br>X` && document.getElementById(id).innerHTML !== `${player2Player}<br>O`) {
       if (player1Player2) {
-        document.getElementById(id).innerHTML = 'x';
+        document.getElementById(id).innerHTML =  `${player1Player}<br>X`;
         playBoard[row][column] = 1;
       } else {
-        document.getElementById(id).innerHTML = 'o';
+        document.getElementById(id).innerHTML = `${player2Player}<br>O`;
         playBoard[row][column] = 2;
       }
     }
@@ -146,7 +196,6 @@ const checkWinner = (player1, player2, method) => {
     gameFinish = true;
     winner = true;
     player1Score++;
-    console.log('player1won');
     document.getElementById("player1").innerHTML = player1Score;
     winAnnouncment(method, '1');
     return;
@@ -154,7 +203,6 @@ const checkWinner = (player1, player2, method) => {
     gameFinish = true;
     winner = false;
     player2Score++;
-    console.log('player2won');
     document.getElementById("player2").innerHTML = player2Score;
     winAnnouncment(method, '2');
     return;
