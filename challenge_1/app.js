@@ -26,37 +26,44 @@ let playBoard = makeBoard(size);
 function makeDOMBoard(big) {
   let dOMBoard = [];
   let chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-  for (let row = 1; row <= big; row++) {
+  for (let row = 0; row < big; row++) {
     dOMBoard[row] = [];
     for (let c = 0; c < big; c++) {
-      let id = row + chars.charAt(c);
+      let id = (row + 1) + chars.charAt(c);
       dOMBoard[row].push(id);
     }
   }
   return dOMBoard;
 }
 
-let board = makeDOMBoard(size);
+var board = makeDOMBoard(size);
 
-// function buildDOMBoard() {
-//   let table = document.createElement("table");
-//   for (let row = 0; row < board.length; row++) {
-//     let row = document.createElement("tr");
-//     for (let col = 0; col < board[row].length; col++) {
-//       let slot = document.createElement("td");
-//       let text = document.createTextNode("-");
-//       slot.id = board[row][col];
-//       slot.appendChild(text);
-//       row.appendChild(slot);
-//     }
-//     table.appendChild(row);
-//   }
-//   document.getElementsByTagName("div").appendChild(table);
-// }
+(function buildDOMBoard() {
+  let table = document.createElement("table");
+  for (let row = 0; row < board.length; row++) {
+    let tableRow = document.createElement("tr");
+    let thatRow = board[row];
+
+    for (let col = 0; col < thatRow.length; col++) {
+      let slot = document.createElement("td");
+      let text = document.createTextNode("-");
+      slot.id = board[row][col];
+      slot.appendChild(text);
+      tableRow.appendChild(slot);
+    }
+    table.appendChild(tableRow);
+  }
+  document.getElementById("table").appendChild(table);
+})();
 
 
 
-//Reset Board
+/*
+==========
+Reset Board
+==========
+*/
+
 document.getElementById("reset").onclick = function() {
   board.forEach((row) => {
     row.forEach((position) => {
@@ -69,14 +76,11 @@ document.getElementById("reset").onclick = function() {
 }
 
 
-
 /* 
 ==========
-Add eventListener to Pieces
+Single Event Listener
 ==========
 */
-
-
 
 document.addEventListener('click', (event) => {
   let id = event.target.id;
@@ -125,11 +129,11 @@ const winAnnouncment = (winMethod, player) => {
 }
 
 const checkWinner = (player1, player2, method) => {
-  if (player1 === 3) {
+  if (player1 === size) {
     gameFinish = true;
     winAnnouncment(method, '1');
     return;
-  } else if (player2 === 3) {
+  } else if (player2 === size) {
     gameFinish = true;
     winAnnouncment(method, '2');
     return;
