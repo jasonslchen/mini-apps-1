@@ -54,95 +54,6 @@ function (_React$Component) {
     _this.nextPage = _this.nextPage.bind(_assertThisInitialized(_this));
     /*
     ==========
-    f1
-    ==========
-    */
-
-    _this.f1 = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Name:", React.createElement("input", {
-      type: "text",
-      id: "name",
-      onChange: _this.inputFormChange,
-      value: _this.name
-    })), React.createElement("br", null), React.createElement("label", null, "Email:", React.createElement("input", {
-      type: "text",
-      id: "email",
-      onChange: _this.inputFormChange,
-      value: _this.email
-    })), React.createElement("br", null), React.createElement("label", null, "Password:", React.createElement("input", {
-      type: "text",
-      id: "password",
-      onChange: _this.inputFormChange,
-      value: _this.password
-    })), React.createElement("br", null), React.createElement("input", {
-      type: "submit",
-      onClick: _this.submitInputFormData
-    })), React.createElement("button", {
-      onClick: _this.nextPage
-    }, "Next"));
-    _this.f2 = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Address Line 1", React.createElement("input", {
-      type: "text",
-      id: "address1",
-      onChange: _this.inputFormChange,
-      value: _this.address1
-    })), React.createElement("br", null), React.createElement("label", null, "Address Line 2", React.createElement("input", {
-      type: "text",
-      id: "address2",
-      onChange: _this.inputFormChange,
-      value: _this.address2
-    })), React.createElement("br", null), React.createElement("label", null, "City", React.createElement("input", {
-      type: "text",
-      id: "city",
-      onChange: _this.inputFormChange,
-      value: _this.city
-    })), React.createElement("br", null), React.createElement("label", null, "State", React.createElement("input", {
-      type: "text",
-      id: "homestate",
-      onChange: _this.inputFormChange,
-      value: _this.homestate
-    })), React.createElement("br", null), React.createElement("label", null, "Zip Code", React.createElement("input", {
-      type: "text",
-      id: "zipcode",
-      onChange: _this.inputFormChange,
-      value: _this.zipcode
-    })), React.createElement("br", null), React.createElement("label", null, "Phone Number", React.createElement("input", {
-      type: "text",
-      id: "phoneNumber",
-      onChange: _this.inputFormChange,
-      value: _this.phoneNumber
-    })), React.createElement("br", null), React.createElement("input", {
-      type: "submit",
-      onClick: _this.submitInputFormData
-    })), React.createElement("button", {
-      onClick: _this.nextPage
-    }, "Next"));
-    _this.f3 = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Credit Card Number:", React.createElement("input", {
-      type: "text",
-      id: "ccNumber",
-      onChange: _this.inputFormChange,
-      value: _this.ccNumber
-    })), React.createElement("br", null), React.createElement("label", null, "Expiration Date:", React.createElement("input", {
-      type: "text",
-      id: "expDate",
-      onChange: _this.inputFormChange,
-      value: _this.expDate
-    })), React.createElement("br", null), React.createElement("label", null, "CVV:", React.createElement("input", {
-      type: "text",
-      id: "cvv",
-      onChange: _this.inputFormChange,
-      value: _this.cvv
-    })), React.createElement("br", null), React.createElement("label", null, "Billing Zip Code:", React.createElement("input", {
-      type: "text",
-      id: "billZip",
-      onChange: _this.inputFormChange,
-      value: _this.billZip
-    })), React.createElement("br", null), React.createElement("input", {
-      type: "submit",
-      onClick: _this.submitInputFormData
-    })), React.createElement("button", {
-      onClick: _this.nextPage
-    }, "Next"));
-    /*
-    ==========
     handler function binds
     ==========
     */
@@ -201,11 +112,7 @@ function (_React$Component) {
   }, {
     key: "inputFormChange",
     value: function inputFormChange(event) {
-      event.persist();
-      console.log(this.state[event.target.id]);
-      this.setState(function (state) {
-        return _defineProperty({}, event.target.id, event.target.value);
-      });
+      this.setState(_defineProperty({}, event.target.id, event.target.value));
     }
   }, {
     key: "submitInputFormData",
@@ -223,11 +130,91 @@ function (_React$Component) {
           id: "checkout"
         }, "Checkout");
       } else if (this.state.page === 1) {
-        webpageDOM = this.f1;
+        webpageDOM = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Name:", React.createElement("input", {
+          type: "text",
+          id: "name",
+          onChange: this.inputFormChange,
+          value: this.state.name
+        })), React.createElement("br", null), React.createElement("label", null, "Email:", React.createElement("input", {
+          type: "text",
+          id: "email",
+          onChange: this.inputFormChange,
+          value: this.state.email
+        })), React.createElement("br", null), React.createElement("label", null, "Password:", React.createElement("input", {
+          type: "text",
+          id: "password",
+          onChange: this.inputFormChange,
+          value: this.state.password
+        })), React.createElement("br", null), React.createElement("input", {
+          type: "submit",
+          onClick: this.submitInputFormData
+        })), React.createElement("button", {
+          onClick: this.nextPage
+        }, "Next"));
       } else if (this.state.page === 2) {
-        webpageDOM = this.f2;
+        webpageDOM = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Address Line 1", React.createElement("input", {
+          type: "text",
+          id: "address1",
+          onChange: this.inputFormChange,
+          value: this.state.address1
+        })), React.createElement("br", null), React.createElement("label", null, "Address Line 2", React.createElement("input", {
+          type: "text",
+          id: "address2",
+          onChange: this.inputFormChange,
+          value: this.state.address2
+        })), React.createElement("br", null), React.createElement("label", null, "City", React.createElement("input", {
+          type: "text",
+          id: "city",
+          onChange: this.inputFormChange,
+          value: this.state.city
+        })), React.createElement("br", null), React.createElement("label", null, "State", React.createElement("input", {
+          type: "text",
+          id: "homestate",
+          onChange: this.inputFormChange,
+          value: this.state.homestate
+        })), React.createElement("br", null), React.createElement("label", null, "Zip Code", React.createElement("input", {
+          type: "text",
+          id: "zipcode",
+          onChange: this.inputFormChange,
+          value: this.state.zipcode
+        })), React.createElement("br", null), React.createElement("label", null, "Phone Number", React.createElement("input", {
+          type: "text",
+          id: "phoneNumber",
+          onChange: this.inputFormChange,
+          value: this.state.phoneNumber
+        })), React.createElement("br", null), React.createElement("input", {
+          type: "submit",
+          onClick: this.submitInputFormData
+        })), React.createElement("button", {
+          onClick: this.nextPage
+        }, "Next"));
       } else if (this.state.page === 3) {
-        webpageDOM = this.f3;
+        webpageDOM = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Credit Card Number:", React.createElement("input", {
+          type: "text",
+          id: "ccNumber",
+          onChange: this.inputFormChange,
+          value: this.state.ccNumber
+        })), React.createElement("br", null), React.createElement("label", null, "Expiration Date:", React.createElement("input", {
+          type: "text",
+          id: "expDate",
+          onChange: this.inputFormChange,
+          value: this.state.expDate
+        })), React.createElement("br", null), React.createElement("label", null, "CVV:", React.createElement("input", {
+          type: "text",
+          id: "cvv",
+          onChange: this.inputFormChange,
+          value: this.state.cvv
+        })), React.createElement("br", null), React.createElement("label", null, "Billing Zip Code:", React.createElement("input", {
+          type: "text",
+          id: "billZip",
+          onChange: this.inputFormChange,
+          value: this.state.billZip
+        })), React.createElement("br", null), React.createElement("input", {
+          type: "submit",
+          onClick: this.submitInputFormData
+        })), React.createElement("button", {
+          onClick: this.nextPage
+        }, "Next"));
       }
 
       return React.createElement("div", null, React.createElement("header", null, "The Complete Checkout Experience"), webpageDOM);

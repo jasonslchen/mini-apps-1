@@ -25,84 +25,8 @@ class App extends React.Component {
     this.submitInputFormData = this.submitInputFormData.bind(this);
     this.nextPage = this.nextPage.bind(this);
 
-    /*
-    ==========
-    f1
-    ==========
-    */
-
-    this.f1 = <div>
-                <form>
-                  <label>
-                    Name: 
-                    <input type="text" id="name" onChange={this.inputFormChange} value={this.name}></input>
-                  </label><br></br>
-                  <label>
-                    Email:
-                    <input type="text" id="email" onChange={this.inputFormChange} value={this.email}></input>
-                  </label><br></br>
-                  <label>
-                    Password:
-                    <input type="text" id="password" onChange={this.inputFormChange} value={this.password}></input>
-                  </label><br></br>
-                  <input type="submit" onClick={this.submitInputFormData}></input>
-                 </form>
-                 <button onClick={this.nextPage}>Next</button>
-               </div>;
     
-    this.f2 = <div>
-                <form>
-                  <label>
-                    Address Line 1 
-                    <input type="text" id="address1" onChange={this.inputFormChange} value={this.address1}></input>
-                  </label><br></br>
-                  <label>
-                    Address Line 2  
-                    <input type="text" id="address2" onChange={this.inputFormChange} value={this.address2}></input>
-                  </label><br></br>
-                  <label>
-                    City
-                    <input type="text" id="city" onChange={this.inputFormChange} value={this.city}></input>
-                  </label><br></br>
-                  <label>
-                    State
-                    <input type="text" id="homestate" onChange={this.inputFormChange} value={this.homestate}></input>
-                  </label><br></br>
-                  <label>
-                    Zip Code
-                    <input type="text" id="zipcode" onChange={this.inputFormChange} value={this.zipcode}></input>
-                  </label><br></br>
-                  <label>
-                    Phone Number
-                    <input type="text" id="phoneNumber" onChange={this.inputFormChange} value={this.phoneNumber}></input>
-                  </label><br></br>
-                  <input type="submit" onClick={this.submitInputFormData}></input>
-                </form>
-                <button onClick={this.nextPage}>Next</button>
-              </div>;
-
-    this.f3 = <div>
-                <form>
-                  <label>
-                    Credit Card Number: 
-                    <input type="text" id="ccNumber" onChange={this.inputFormChange} value={this.ccNumber}></input>
-                  </label><br></br>
-                  <label>
-                    Expiration Date:
-                    <input type="text" id="expDate" onChange={this.inputFormChange} value={this.expDate}></input>
-                  </label><br></br>
-                  <label>
-                    CVV:
-                    <input type="text" id="cvv" onChange={this.inputFormChange} value={this.cvv}></input>
-                  </label><br></br>
-                  <label>
-                    Billing Zip Code:
-                    <input type="text" id="billZip" onChange={this.inputFormChange} value={this.billZip}></input>
-                  </label><br></br>
-                  <input type="submit" onClick={this.submitInputFormData}></input>
-                </form>
-                <button onClick={this.nextPage}>Next</button>
-              </div>;
+        
 
   /*
   ==========
@@ -154,10 +78,8 @@ class App extends React.Component {
   */
 
   inputFormChange(event) {
-    event.persist();
-    console.log(this.state[event.target.id])
-    this.setState((state) => {
-      return {[event.target.id]: event.target.value}
+    this.setState({
+      [event.target.id]: event.target.value
     })
   }
 
@@ -166,23 +88,85 @@ class App extends React.Component {
   }
   
 
-
-
-
-
-
-
   render() {
     let webpageDOM;
     if (this.state.page === 0) {
       webpageDOM = <button onClick={this.nextPage} id="checkout">Checkout</button>
     } else if (this.state.page === 1) {
-      webpageDOM = this.f1;
+      webpageDOM = <div>
+      <form>
+        <label>
+          Name: 
+          <input type="text" id="name" onChange={this.inputFormChange} value={this.state.name}></input>
+        </label><br></br>
+        <label>
+          Email:
+          <input type="text" id="email" onChange={this.inputFormChange} value={this.state.email}></input>
+        </label><br></br>
+        <label>
+          Password:
+          <input type="text" id="password" onChange={this.inputFormChange} value={this.state.password}></input>
+        </label><br></br>
+        <input type="submit" onClick={this.submitInputFormData}></input>
+       </form>
+       <button onClick={this.nextPage}>Next</button>
+     </div>;
     } 
     else if (this.state.page === 2) {
-      webpageDOM = this.f2;
+      webpageDOM = <div>
+      <form>
+        <label>
+          Address Line 1 
+          <input type="text" id="address1" onChange={this.inputFormChange} value={this.state.address1}></input>
+        </label><br></br>
+        <label>
+          Address Line 2  
+          <input type="text" id="address2" onChange={this.inputFormChange} value={this.state.address2}></input>
+        </label><br></br>
+        <label>
+          City
+          <input type="text" id="city" onChange={this.inputFormChange} value={this.state.city}></input>
+        </label><br></br>
+        <label>
+          State
+          <input type="text" id="homestate" onChange={this.inputFormChange} value={this.state.homestate}></input>
+        </label><br></br>
+        <label>
+          Zip Code
+          <input type="text" id="zipcode" onChange={this.inputFormChange} value={this.state.zipcode}></input>
+        </label><br></br>
+        <label>
+          Phone Number
+          <input type="text" id="phoneNumber" onChange={this.inputFormChange} value={this.state.phoneNumber}></input>
+        </label><br></br>
+        <input type="submit" onClick={this.submitInputFormData}></input>
+      </form>
+      <button onClick={this.nextPage}>Next</button>
+    </div>;
+
     } else if (this.state.page === 3) {
-      webpageDOM = this.f3;
+      webpageDOM = <div>
+      <form>
+        <label>
+          Credit Card Number: 
+          <input type="text" id="ccNumber" onChange={this.inputFormChange} value={this.state.ccNumber}></input>
+        </label><br></br>
+        <label>
+          Expiration Date:
+          <input type="text" id="expDate" onChange={this.inputFormChange} value={this.state.expDate}></input>
+        </label><br></br>
+        <label>
+          CVV:
+          <input type="text" id="cvv" onChange={this.inputFormChange} value={this.state.cvv}></input>
+        </label><br></br>
+        <label>
+          Billing Zip Code:
+          <input type="text" id="billZip" onChange={this.inputFormChange} value={this.state.billZip}></input>
+        </label><br></br>
+        <input type="submit" onClick={this.submitInputFormData}></input>
+      </form>
+      <button onClick={this.nextPage}>Next</button>
+    </div>;
     }
 
     return <div>
