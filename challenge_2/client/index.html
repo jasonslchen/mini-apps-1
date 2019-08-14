@@ -2,10 +2,11 @@
 <html lang="en">
   <head>
     <title>CSV Report Generator</title>  
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   </head>
   <body>
     <form action="/" method="post" id="csvForm" name="csvSubmit" enctype="multipart/form-data">
-      <input type="file" name="csv">
+      <input type="file" name="csv" id="csv">
       <input type="submit" name="submit" value="Generate CSV">
     </form>
     <script src="app.js"></script>

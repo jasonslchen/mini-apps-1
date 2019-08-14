@@ -17,11 +17,6 @@ const bodyParser = require('body-parser');
 app.use(express.static('client'));
 
 app.post('/', upload.any(), (req, res, next) => {
-  console.log(req.body);
-  console.log(req.files);
-  // console.log(__dirname + req.files[0].filename)
-  // res.send(typeof req.files[0].filename);
-  
   fs.readFile((req.files[0].filename), 'utf8', (err, data) => {
     if (err) {
       res.status(500).send(err);
