@@ -4,8 +4,8 @@
     <title>CSV Report Generator</title>  
   </head>
   <body>
-    <form action="http://localhost:3000" method="post" id="csvForm">
-      <textarea name="content" form="csvForm"></textarea>
+    <form action="/" method="post" id="csvForm" name="csvSubmit" enctype="multipart/form-data">
+      <input type="file" name="csv">
       <input type="submit" name="submit" value="Generate CSV">
     </form>
     <script src="app.js"></script>
