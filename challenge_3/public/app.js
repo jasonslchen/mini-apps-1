@@ -52,27 +52,17 @@ function (_React$Component) {
 
     _this.submitInputFormData = _this.submitInputFormData.bind(_assertThisInitialized(_this));
     _this.nextPage = _this.nextPage.bind(_assertThisInitialized(_this));
-    /*
-    ==========
-    handler function binds
-    ==========
-    */
-
+    _this.onPurchase = _this.onPurchase.bind(_assertThisInitialized(_this));
     return _this;
   }
+  /*
+  ==========
+  render pages
+  ==========
+  */
+
 
   _createClass(App, [{
-    key: "componentDidMount",
-    value: function componentDidMount() {
-      this.homePage();
-    }
-    /*
-    ==========
-    render pages
-    ==========
-    */
-
-  }, {
     key: "nextPage",
     value: function nextPage() {
       // console.log(this.state.page);
@@ -82,33 +72,6 @@ function (_React$Component) {
         };
       });
     }
-    /*
-    ==========
-    home page
-    ==========
-    */
-
-  }, {
-    key: "homePage",
-    value: function homePage() {
-      this.setState({
-        webpage: React.createElement("button", {
-          onClick: this.nextPage,
-          id: "checkout"
-        }, "Checkout")
-      });
-    } // renderf1Page() {
-    //   this.setState({
-    //     webpage: this.f1
-    //   })
-    // }
-
-    /*
-    ==========
-    f1 page
-    ==========
-    */
-
   }, {
     key: "inputFormChange",
     value: function inputFormChange(event) {
@@ -117,6 +80,14 @@ function (_React$Component) {
   }, {
     key: "submitInputFormData",
     value: function submitInputFormData(event) {
+      event.preventDefault();
+    }
+  }, {
+    key: "onPurchase",
+    value: function onPurchase(event) {
+      this.setState({
+        page: 0
+      });
       event.preventDefault();
     }
   }, {
@@ -215,6 +186,10 @@ function (_React$Component) {
         })), React.createElement("button", {
           onClick: this.nextPage
         }, "Next"));
+      } else if (this.state.page === 4) {
+        webpageDOM = React.createElement("div", null, React.createElement("h2", null, "Payment Information"), React.createElement("h3", null, "Page 1 Information"), React.createElement("div", null, "Name: ", this.state.name), React.createElement("div", null, "Email: ", this.state.email), React.createElement("div", null, "Password: ", this.state.password), React.createElement("h3", null, "Page 2 Information"), React.createElement("div", null, "Address Line 1: ", this.state.address1), React.createElement("div", null, "Address Line 2: ", this.state.address2), React.createElement("div", null, "City: ", this.state.city), React.createElement("div", null, "State: ", this.state.homestate), React.createElement("div", null, "Zip Code: ", this.state.zipcode), React.createElement("div", null, "Phone Number: ", this.state.phoneNumber), React.createElement("h3", null, "Page 3 Information"), React.createElement("div", null, "Credit Card Number: ", this.state.ccNumber), React.createElement("div", null, "Credit Card Expiration Date: ", this.state.expDate), React.createElement("div", null, "Credit Card CVV Number: ", this.state.cvv), React.createElement("div", null, "Billing Zip Code: ", this.state.billZip), React.createElement("button", {
+          onClick: this.onPurchase
+        }, "Purchase"));
       }
 
       return React.createElement("div", null, React.createElement("header", null, "The Complete Checkout Experience"), webpageDOM);

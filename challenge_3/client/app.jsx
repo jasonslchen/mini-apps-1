@@ -24,23 +24,10 @@ class App extends React.Component {
    //  this.renderf1Page = this.renderf1Page.bind(this);
     this.submitInputFormData = this.submitInputFormData.bind(this);
     this.nextPage = this.nextPage.bind(this);
-
-    
-        
-
-  /*
-  ==========
-  handler function binds
-  ==========
-  */
-
+    this.onPurchase = this.onPurchase.bind(this);
 
   }
-  
-  componentDidMount() {
-    this.homePage();
-  }
-
+ 
   /*
   ==========
   render pages
@@ -54,29 +41,6 @@ class App extends React.Component {
    });
  }
 
-  /*
-  ==========
-  home page
-  ==========
-  */
-
-  homePage() {
-    this.setState ({
-      webpage: <button onClick={this.nextPage} id="checkout">Checkout</button>
-    })
-  }
-
-  // renderf1Page() {
-  //   this.setState({
-  //     webpage: this.f1
-  //   })
-  // }
-  /*
-  ==========
-  f1 page
-  ==========
-  */
-
   inputFormChange(event) {
     this.setState({
       [event.target.id]: event.target.value
@@ -87,6 +51,12 @@ class App extends React.Component {
     event.preventDefault();
   }
   
+  onPurchase(event) {
+    this.setState({
+      page: 0
+    })
+    event.preventDefault();
+  }
 
   render() {
     let webpageDOM;
@@ -167,6 +137,27 @@ class App extends React.Component {
       </form>
       <button onClick={this.nextPage}>Next</button>
     </div>;
+    } else if (this.state.page === 4) {
+      webpageDOM = <div>
+        <h2>Payment Information</h2>
+        <h3>Page 1 Information</h3>
+        <div>Name: {this.state.name}</div>
+        <div>Email: {this.state.email}</div>
+        <div>Password: {this.state.password}</div>
+        <h3>Page 2 Information</h3>
+        <div>Address Line 1: {this.state.address1}</div>
+        <div>Address Line 2: {this.state.address2}</div>
+        <div>City: {this.state.city}</div>
+        <div>State: {this.state.homestate}</div>
+        <div>Zip Code: {this.state.zipcode}</div>
+        <div>Phone Number: {this.state.phoneNumber}</div>
+        <h3>Page 3 Information</h3>
+        <div>Credit Card Number: {this.state.ccNumber}</div>
+        <div>Credit Card Expiration Date: {this.state.expDate}</div>
+        <div>Credit Card CVV Number: {this.state.cvv}</div>
+        <div>Billing Zip Code: {this.state.billZip}</div>
+        <button onClick={this.onPurchase}>Purchase</button>
+      </div>
     }
 
     return <div>
