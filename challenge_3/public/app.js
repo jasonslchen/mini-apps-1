@@ -80,6 +80,24 @@ function (_React$Component) {
   }, {
     key: "submitInputFormData",
     value: function submitInputFormData(event) {
+      // console.log(event.target.parentNode.id);
+      // console.log(document.getElementById(event.target.parentNode.id).children);
+      // .childNodes[1].id
+      var level1 = document.getElementById(event.target.parentNode.id).childNodes;
+
+      for (var i = 0; i < level1.length; i++) {
+        if (level1[i].hasChildNodes()) {
+          var childs = level1[i].childNodes[1].id;
+        } // let child = level1[i].children;
+        // let child1 = level1[i].childNodes;
+        // console.log(child);
+        // console.log(child1);
+        // for (let i = 0; i < child.length; i++) {
+        //   console.log(child[i]);
+        // }
+
+      }
+
       event.preventDefault();
     }
   }, {
@@ -101,7 +119,9 @@ function (_React$Component) {
           id: "checkout"
         }, "Checkout");
       } else if (this.state.page === 1) {
-        webpageDOM = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Name:", React.createElement("input", {
+        webpageDOM = React.createElement("div", null, React.createElement("form", {
+          id: "f1"
+        }, React.createElement("label", null, "Name:", React.createElement("input", {
           type: "text",
           id: "name",
           onChange: this.inputFormChange,
@@ -123,7 +143,9 @@ function (_React$Component) {
           onClick: this.nextPage
         }, "Next"));
       } else if (this.state.page === 2) {
-        webpageDOM = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Address Line 1", React.createElement("input", {
+        webpageDOM = React.createElement("div", null, React.createElement("form", {
+          id: "f2"
+        }, React.createElement("label", null, "Address Line 1", React.createElement("input", {
           type: "text",
           id: "address1",
           onChange: this.inputFormChange,
@@ -160,7 +182,9 @@ function (_React$Component) {
           onClick: this.nextPage
         }, "Next"));
       } else if (this.state.page === 3) {
-        webpageDOM = React.createElement("div", null, React.createElement("form", null, React.createElement("label", null, "Credit Card Number:", React.createElement("input", {
+        webpageDOM = React.createElement("div", null, React.createElement("form", {
+          id: "f3"
+        }, React.createElement("label", null, "Credit Card Number:", React.createElement("input", {
           type: "text",
           id: "ccNumber",
           onChange: this.inputFormChange,

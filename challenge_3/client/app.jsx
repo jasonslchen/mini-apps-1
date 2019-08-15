@@ -48,7 +48,26 @@ class App extends React.Component {
   }
 
   submitInputFormData(event) {
+    // console.log(event.target.parentNode.id);
+    // console.log(document.getElementById(event.target.parentNode.id).children);
+    // .childNodes[1].id
+    let level1 = document.getElementById(event.target.parentNode.id).childNodes;
+    for (let i = 0; i < level1.length; i++) {
+      if (level1[i].hasChildNodes()) {
+        let childs = level1[i].childNodes[1].id;  
+      }
+      // let child = level1[i].children;
+      // let child1 = level1[i].childNodes;
+      // console.log(child);
+      // console.log(child1);
+      // for (let i = 0; i < child.length; i++) {
+      //   console.log(child[i]);
+      // }
+    }
+
+
     event.preventDefault();
+
   }
   
   onPurchase(event) {
@@ -64,7 +83,7 @@ class App extends React.Component {
       webpageDOM = <button onClick={this.nextPage} id="checkout">Checkout</button>
     } else if (this.state.page === 1) {
       webpageDOM = <div>
-      <form>
+      <form id="f1">
         <label>
           Name: 
           <input type="text" id="name" onChange={this.inputFormChange} value={this.state.name}></input>
@@ -84,7 +103,7 @@ class App extends React.Component {
     } 
     else if (this.state.page === 2) {
       webpageDOM = <div>
-      <form>
+      <form id="f2">
         <label>
           Address Line 1 
           <input type="text" id="address1" onChange={this.inputFormChange} value={this.state.address1}></input>
@@ -116,7 +135,7 @@ class App extends React.Component {
 
     } else if (this.state.page === 3) {
       webpageDOM = <div>
-      <form>
+      <form id="f3">
         <label>
           Credit Card Number: 
           <input type="text" id="ccNumber" onChange={this.inputFormChange} value={this.state.ccNumber}></input>
