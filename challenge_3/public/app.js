@@ -46,13 +46,15 @@ function (_React$Component) {
       ccNumber: '',
       expDate: '',
       cvv: '',
-      billZip: ''
+      billZip: '',
+      checkout: 0
     };
     _this.inputFormChange = _this.inputFormChange.bind(_assertThisInitialized(_this)); //  this.renderf1Page = this.renderf1Page.bind(this);
 
     _this.submitInputFormData = _this.submitInputFormData.bind(_assertThisInitialized(_this));
     _this.nextPage = _this.nextPage.bind(_assertThisInitialized(_this));
     _this.onPurchase = _this.onPurchase.bind(_assertThisInitialized(_this));
+    _this.initiateCheckoutRecord = _this.initiateCheckoutRecord.bind(_assertThisInitialized(_this));
     return _this;
   }
   /*
@@ -78,6 +80,23 @@ function (_React$Component) {
       this.setState(_defineProperty({}, event.target.id, event.target.value));
     }
   }, {
+    key: "initiateCheckoutRecord",
+    value: function initiateCheckoutRecord() {
+      fetch('http://localhost:3000/init', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          checkout: this.state.checkout
+        })
+      }).then(function (data) {
+        console.log(data);
+      })["catch"](function (err) {
+        console.log(err);
+      });
+    }
+  }, {
     key: "submitInputFormData",
     value: function submitInputFormData(event) {
       var form = event.target.parentNode.id;
@@ -87,15 +106,16 @@ function (_React$Component) {
         var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
         return fetch(url, {
           method: 'POST',
-          body: JSON.stringify(data),
           headers: {
             'Content-Type': 'application/json'
-          }
+          },
+          body: JSON.stringify(data)
         });
       }
 
       if (form === 'f1') {
-        postData('http://localhost:3000/', {
+        postData('http://localhost:3000/f1', {
+          checkout: this.state.checkout,
           name: this.state.name,
           email: this.state.email,
           password: this.state.password
@@ -105,7 +125,8 @@ function (_React$Component) {
           console.log(error);
         });
       } else if (form === 'f2') {
-        postData('http://localhost:3000/', {
+        postData('/f2', {
+          checkout: this.state.checkout,
           address1: this.state.address1,
           address2: this.state.address2,
           city: this.state.city,
@@ -118,7 +139,8 @@ function (_React$Component) {
           console.log(error);
         });
       } else if (form === 'f3') {
-        postData('http://localhost:3000/', {
+        postData('http://localhost:3000/f3', {
+          checkout: this.state.checkout,
           ccNumber: this.state.ccNumber,
           expDate: this.state.expDate,
           cvv: this.state.cvv,
@@ -135,8 +157,11 @@ function (_React$Component) {
   }, {
     key: "onPurchase",
     value: function onPurchase(event) {
-      this.setState({
-        page: 0
+      this.setState(function (state) {
+        return {
+          page: 0,
+          checkout: state.checkout + 1
+        };
       });
       event.preventDefault();
     }
@@ -149,7 +174,11 @@ function (_React$Component) {
 
       if (this.state.page === 0) {
         webpageDOM = React.createElement("button", {
-          onClick: this.nextPage,
+          onClick: function onClick() {
+            _this2.nextPage();
+
+            _this2.initiateCheckoutRecord();
+          },
           id: "checkout"
         }, "Checkout");
       } else if (this.state.page === 1) {

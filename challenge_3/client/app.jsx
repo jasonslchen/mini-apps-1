@@ -17,7 +17,8 @@ class App extends React.Component {
       ccNumber: '',
       expDate: '',
       cvv: '',
-      billZip: ''
+      billZip: '',
+      checkout: 0
     }
 
     this.inputFormChange = this.inputFormChange.bind(this);
@@ -25,6 +26,7 @@ class App extends React.Component {
     this.submitInputFormData = this.submitInputFormData.bind(this);
     this.nextPage = this.nextPage.bind(this);
     this.onPurchase = this.onPurchase.bind(this);
+    this.initiateCheckoutRecord = this.initiateCheckoutRecord.bind(this);
 
   }
  
@@ -47,30 +49,43 @@ class App extends React.Component {
     })
   }
 
+  initiateCheckoutRecord() {
+    fetch('http://localhost:3000/init', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({checkout: this.state.checkout})
+      
+    })
+    .then((data) => {console.log(data)})
+    .catch((err) => {console.log(err)})
+  }
+
   submitInputFormData(event) {
     let form = event.target.parentNode.id;
 
     function postData(url='/', data={}) {
       return fetch(url, {
         method: 'POST',
-        body: JSON.stringify(data),
         headers: {
           'Content-Type': 'application/json'
-        }
+        },
+        body: JSON.stringify(data)
       })
     }
     
 
     if (form === 'f1') {
-      postData('http://localhost:3000/', {name: this.state.name, email: this.state.email, password: this.state.password})
+      postData('http://localhost:3000/f1', {checkout: this.state.checkout, name: this.state.name, email: this.state.email, password: this.state.password})
       .then((data) => {console.log(data)})
       .catch((error) => {console.log(error)})
     } else if (form === 'f2') {
-      postData('http://localhost:3000/', {address1: this.state.address1, address2: this.state.address2, city: this.state.city, homestate: this.state.homestate, zipcode: this.state.zipcode, phoneNumber: this.state.phoneNumber})
+      postData('/f2', {checkout: this.state.checkout, address1: this.state.address1, address2: this.state.address2, city: this.state.city, homestate: this.state.homestate, zipcode: this.state.zipcode, phoneNumber: this.state.phoneNumber})
       .then((data) => {console.log(data)})
       .catch((error) => {console.log(error)})
     } else if (form === 'f3') {
-      postData('http://localhost:3000/', {ccNumber: this.state.ccNumber, expDate: this.state.expDate, cvv: this.state.cvv, billZip: this.state.billZip})
+      postData('http://localhost:3000/f3', {checkout: this.state.checkout, ccNumber: this.state.ccNumber, expDate: this.state.expDate, cvv: this.state.cvv, billZip: this.state.billZip})
       .then((data) => {console.log(data)})
       .catch((error) => {console.log(error)})
     }
@@ -80,8 +95,9 @@ class App extends React.Component {
   }
   
   onPurchase(event) {
-    this.setState({
-      page: 0
+    this.setState((state) => {
+      return {page: 0,
+      checkout: state.checkout + 1}
     })
     event.preventDefault();
   }
@@ -89,7 +105,7 @@ class App extends React.Component {
   render() {
     let webpageDOM;
     if (this.state.page === 0) {
-      webpageDOM = <button onClick={this.nextPage} id="checkout">Checkout</button>
+      webpageDOM = <button onClick={() => {this.nextPage(); this.initiateCheckoutRecord()}} id="checkout">Checkout</button>
     } else if (this.state.page === 1) {
       webpageDOM = <div>
       <form id="f1">
