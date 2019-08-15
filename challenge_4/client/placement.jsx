@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 
 var Placement = (props) => {
   return (
-    <button id={props.id} value={'X'}></button>
+    <td id={props.id} onClick={props.click}></td>
   )
 }
 

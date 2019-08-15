@@ -5,10 +5,36 @@ import Placement from './placement.jsx';
 class Table extends React.Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      player: true
+    }
+
+    this.redCircle = 'X';
+    this.blueCircle = <div className="blue">O</div>;
+    // <div className="red"></div>;
+    //true = red, false = blue;
+    
+    this.onConnect = this.onConnect.bind(this);
   }
   
   createPlacement(value, marker='') {
-    return (<Placement id={value} value={marker}/>)
+    return (<Placement id={value} click={this.onConnect} />)
+  }
+
+  onConnect(event) {
+    let spot = document.getElementById(event.target.id);
+    if (this.state.player) {
+      spot.innerHTML = this.redCircle;
+      this.setState({
+        player: false
+      })
+    } else {
+      spot.innerHTML = this.blueCircle;
+      this.setState({
+        player: true
+      })
+    }
   }
 
 
