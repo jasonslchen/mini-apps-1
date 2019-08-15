@@ -2,20 +2,22 @@ const express = require('express');
 const app = express();
 const port = 3000;
 const bodyParser = require('body-parser');
+const path = require('path');
 
 app.use(bodyParser.json());
+app.use(express.static('public'));
 
-app.post('/checkout/f1', (req, res, next) => {
-  res.send('hello f1');
+app.post('/', (req, res, next) => {
+  res.send(req.body);
   next();
 })
 
-app.post('/checkout/f2', (req, res, next) => {
+app.post('/', (req, res, next) => {
   res.send('hello f2');
   next();
 })
 
-app.post('/checkout/f3', (req, res, next) => {
+app.post('/', (req, res, next) => {
   res.send('hello f3');
   next();
 })

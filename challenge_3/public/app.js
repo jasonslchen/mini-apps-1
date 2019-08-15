@@ -82,12 +82,52 @@ function (_React$Component) {
     value: function submitInputFormData(event) {
       var form = event.target.parentNode.id;
 
+      function postData() {
+        var url = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '/';
+        var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+        return fetch(url, {
+          method: 'POST',
+          body: JSON.stringify(data),
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+      }
+
       if (form === 'f1') {
-        console.log('hi');
+        postData('http://localhost:3000/', {
+          name: this.state.name,
+          email: this.state.email,
+          password: this.state.password
+        }).then(function (data) {
+          console.log(data);
+        })["catch"](function (error) {
+          console.log(error);
+        });
       } else if (form === 'f2') {
-        console.log('f2');
+        postData('http://localhost:3000/', {
+          address1: this.state.address1,
+          address2: this.state.address2,
+          city: this.state.city,
+          homestate: this.state.homestate,
+          zipcode: this.state.zipcode,
+          phoneNumber: this.state.phoneNumber
+        }).then(function (data) {
+          console.log(data);
+        })["catch"](function (error) {
+          console.log(error);
+        });
       } else if (form === 'f3') {
-        console.log('f3');
+        postData('http://localhost:3000/', {
+          ccNumber: this.state.ccNumber,
+          expDate: this.state.expDate,
+          cvv: this.state.cvv,
+          billZip: this.state.billZip
+        }).then(function (data) {
+          console.log(data);
+        })["catch"](function (error) {
+          console.log(error);
+        });
       }
 
       event.preventDefault();
