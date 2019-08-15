@@ -80,22 +80,14 @@ function (_React$Component) {
   }, {
     key: "submitInputFormData",
     value: function submitInputFormData(event) {
-      // console.log(event.target.parentNode.id);
-      // console.log(document.getElementById(event.target.parentNode.id).children);
-      // .childNodes[1].id
-      var level1 = document.getElementById(event.target.parentNode.id).childNodes;
+      var form = event.target.parentNode.id;
 
-      for (var i = 0; i < level1.length; i++) {
-        if (level1[i].hasChildNodes()) {
-          var childs = level1[i].childNodes[1].id;
-        } // let child = level1[i].children;
-        // let child1 = level1[i].childNodes;
-        // console.log(child);
-        // console.log(child1);
-        // for (let i = 0; i < child.length; i++) {
-        //   console.log(child[i]);
-        // }
-
+      if (form === 'f1') {
+        console.log('hi');
+      } else if (form === 'f2') {
+        console.log('f2');
+      } else if (form === 'f3') {
+        console.log('f3');
       }
 
       event.preventDefault();
@@ -111,6 +103,8 @@ function (_React$Component) {
   }, {
     key: "render",
     value: function render() {
+      var _this2 = this;
+
       var webpageDOM;
 
       if (this.state.page === 0) {
@@ -136,12 +130,13 @@ function (_React$Component) {
           id: "password",
           onChange: this.inputFormChange,
           value: this.state.password
-        })), React.createElement("br", null), React.createElement("input", {
-          type: "submit",
-          onClick: this.submitInputFormData
-        })), React.createElement("button", {
-          onClick: this.nextPage
-        }, "Next"));
+        })), React.createElement("br", null), React.createElement("button", {
+          onClick: function onClick(event) {
+            _this2.nextPage(event);
+
+            _this2.submitInputFormData(event);
+          }
+        }, "Next")));
       } else if (this.state.page === 2) {
         webpageDOM = React.createElement("div", null, React.createElement("form", {
           id: "f2"
@@ -175,12 +170,13 @@ function (_React$Component) {
           id: "phoneNumber",
           onChange: this.inputFormChange,
           value: this.state.phoneNumber
-        })), React.createElement("br", null), React.createElement("input", {
-          type: "submit",
-          onClick: this.submitInputFormData
-        })), React.createElement("button", {
-          onClick: this.nextPage
-        }, "Next"));
+        })), React.createElement("br", null), React.createElement("button", {
+          onClick: function onClick(event) {
+            _this2.nextPage(event);
+
+            _this2.submitInputFormData(event);
+          }
+        }, "Next")));
       } else if (this.state.page === 3) {
         webpageDOM = React.createElement("div", null, React.createElement("form", {
           id: "f3"
@@ -204,12 +200,13 @@ function (_React$Component) {
           id: "billZip",
           onChange: this.inputFormChange,
           value: this.state.billZip
-        })), React.createElement("br", null), React.createElement("input", {
-          type: "submit",
-          onClick: this.submitInputFormData
-        })), React.createElement("button", {
-          onClick: this.nextPage
-        }, "Next"));
+        })), React.createElement("br", null), React.createElement("button", {
+          onClick: function onClick(event) {
+            _this2.nextPage(event);
+
+            _this2.submitInputFormData(event);
+          }
+        }, "Next")));
       } else if (this.state.page === 4) {
         webpageDOM = React.createElement("div", null, React.createElement("h2", null, "Payment Information"), React.createElement("h3", null, "Page 1 Information"), React.createElement("div", null, "Name: ", this.state.name), React.createElement("div", null, "Email: ", this.state.email), React.createElement("div", null, "Password: ", this.state.password), React.createElement("h3", null, "Page 2 Information"), React.createElement("div", null, "Address Line 1: ", this.state.address1), React.createElement("div", null, "Address Line 2: ", this.state.address2), React.createElement("div", null, "City: ", this.state.city), React.createElement("div", null, "State: ", this.state.homestate), React.createElement("div", null, "Zip Code: ", this.state.zipcode), React.createElement("div", null, "Phone Number: ", this.state.phoneNumber), React.createElement("h3", null, "Page 3 Information"), React.createElement("div", null, "Credit Card Number: ", this.state.ccNumber), React.createElement("div", null, "Credit Card Expiration Date: ", this.state.expDate), React.createElement("div", null, "Credit Card CVV Number: ", this.state.cvv), React.createElement("div", null, "Billing Zip Code: ", this.state.billZip), React.createElement("button", {
           onClick: this.onPurchase

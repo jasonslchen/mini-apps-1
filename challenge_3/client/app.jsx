@@ -48,23 +48,14 @@ class App extends React.Component {
   }
 
   submitInputFormData(event) {
-    // console.log(event.target.parentNode.id);
-    // console.log(document.getElementById(event.target.parentNode.id).children);
-    // .childNodes[1].id
-    let level1 = document.getElementById(event.target.parentNode.id).childNodes;
-    for (let i = 0; i < level1.length; i++) {
-      if (level1[i].hasChildNodes()) {
-        let childs = level1[i].childNodes[1].id;  
-      }
-      // let child = level1[i].children;
-      // let child1 = level1[i].childNodes;
-      // console.log(child);
-      // console.log(child1);
-      // for (let i = 0; i < child.length; i++) {
-      //   console.log(child[i]);
-      // }
+    let form = event.target.parentNode.id;
+    if (form === 'f1') {
+      console.log('hi');
+    } else if (form === 'f2') {
+      console.log('f2');
+    } else if (form === 'f3') {
+      console.log('f3');
     }
-
 
     event.preventDefault();
 
@@ -96,9 +87,8 @@ class App extends React.Component {
           Password:
           <input type="text" id="password" onChange={this.inputFormChange} value={this.state.password}></input>
         </label><br></br>
-        <input type="submit" onClick={this.submitInputFormData}></input>
+       <button onClick={(event) => {this.nextPage(event); this.submitInputFormData(event)}}>Next</button>
        </form>
-       <button onClick={this.nextPage}>Next</button>
      </div>;
     } 
     else if (this.state.page === 2) {
@@ -128,9 +118,8 @@ class App extends React.Component {
           Phone Number
           <input type="text" id="phoneNumber" onChange={this.inputFormChange} value={this.state.phoneNumber}></input>
         </label><br></br>
-        <input type="submit" onClick={this.submitInputFormData}></input>
+        <button onClick={(event) => {this.nextPage(event); this.submitInputFormData(event)}}>Next</button>
       </form>
-      <button onClick={this.nextPage}>Next</button>
     </div>;
 
     } else if (this.state.page === 3) {
@@ -152,9 +141,8 @@ class App extends React.Component {
           Billing Zip Code:
           <input type="text" id="billZip" onChange={this.inputFormChange} value={this.state.billZip}></input>
         </label><br></br>
-        <input type="submit" onClick={this.submitInputFormData}></input>
+        <button onClick={(event) => {this.nextPage(event); this.submitInputFormData(event)}}>Next</button>
       </form>
-      <button onClick={this.nextPage}>Next</button>
     </div>;
     } else if (this.state.page === 4) {
       webpageDOM = <div>
