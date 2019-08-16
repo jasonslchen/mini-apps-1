@@ -7,32 +7,32 @@ class Table extends React.Component {
     super(props);
 
     this.state = {
-      player: true
+      player: true,
+      class: ''
     }
 
-    this.redCircle = 'X';
-    this.blueCircle = <div className="blue">O</div>;
     // <div className="red"></div>;
     //true = red, false = blue;
     
     this.onConnect = this.onConnect.bind(this);
   }
   
-  createPlacement(value, marker='') {
-    return (<Placement id={value} click={this.onConnect} />)
+  createPlacement(value) {
+    return (<Placement id={value} player={this.state.player} click={this.onConnect} />)
   }
 
   onConnect(event) {
     let spot = document.getElementById(event.target.id);
     if (this.state.player) {
-      spot.innerHTML = this.redCircle;
       this.setState({
-        player: false
+        player: false,
+        class: "red"
       })
     } else {
-      spot.innerHTML = this.blueCircle;
+      document.getElementById(event.target.id).appendChild = this.blueCircle;
       this.setState({
-        player: true
+        player: true,
+        class: 'blue'
       })
     }
   }
