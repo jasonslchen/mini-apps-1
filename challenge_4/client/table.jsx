@@ -22,18 +22,17 @@ class Table extends React.Component {
   }
 
   onConnect(event) {
-    let spot = document.getElementById(event.target.id);
-    if (this.state.player) {
-      this.setState({
-        player: false,
-        class: "red"
-      })
-    } else {
-      document.getElementById(event.target.id).appendChild = this.blueCircle;
-      this.setState({
-        player: true,
-        class: 'blue'
-      })
+    if (!event.target.className) {
+      let spot = document.getElementById(event.target.id);
+      if (this.state.player) {
+        this.setState({
+          player: false
+        })
+      } else {
+        this.setState({
+          player: true
+        })
+      }
     }
   }
 
@@ -47,6 +46,7 @@ class Table extends React.Component {
           {this.createPlacement('A3')}
           {this.createPlacement('A4')}
           {this.createPlacement('A5')} 
+          {this.createPlacement('A6')} 
         </tr>
         <tr>
           {this.createPlacement('B1')}
@@ -54,6 +54,7 @@ class Table extends React.Component {
           {this.createPlacement('B3')}
           {this.createPlacement('B4')}
           {this.createPlacement('B5')} 
+          {this.createPlacement('B6')} 
         </tr>
         <tr>
           {this.createPlacement('C1')}
@@ -61,6 +62,7 @@ class Table extends React.Component {
           {this.createPlacement('C3')}
           {this.createPlacement('C4')}
           {this.createPlacement('C5')} 
+          {this.createPlacement('C6')} 
         </tr>
         <tr>
           {this.createPlacement('D1')}
@@ -68,6 +70,7 @@ class Table extends React.Component {
           {this.createPlacement('D3')}
           {this.createPlacement('D4')}
           {this.createPlacement('D5')} 
+          {this.createPlacement('D6')} 
         </tr>
         <tr>
           {this.createPlacement('E1')}
@@ -75,6 +78,23 @@ class Table extends React.Component {
           {this.createPlacement('E3')}
           {this.createPlacement('E4')}
           {this.createPlacement('E5')} 
+          {this.createPlacement('E6')} 
+        </tr>
+        <tr>
+          {this.createPlacement('F1')}
+          {this.createPlacement('F2')}
+          {this.createPlacement('F3')}
+          {this.createPlacement('F4')}
+          {this.createPlacement('F5')} 
+          {this.createPlacement('F6')} 
+        </tr>
+        <tr>
+          {this.createPlacement('G1')}
+          {this.createPlacement('G2')}
+          {this.createPlacement('G3')}
+          {this.createPlacement('G4')}
+          {this.createPlacement('G5')} 
+          {this.createPlacement('G6')} 
         </tr>
       </tbody>
     </table>)

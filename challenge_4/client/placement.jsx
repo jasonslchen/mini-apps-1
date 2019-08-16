@@ -12,15 +12,18 @@ class Placement extends React.Component {
   }
   
   determineColor(e) {
-    if (this.props.player) {
-      this.setState({
-        color: 'red'
-      })
-    } else {
-      this.setState({
-        color: 'blue'
-      })
-    }
+    if(!e.target.className) {
+      if (this.props.player) {
+        this.setState({
+          color: 'red'
+        })
+      } else {
+        this.setState({
+          color: 'yellow'
+        })
+      }
+
+    } 
   }
 
 
@@ -28,7 +31,7 @@ class Placement extends React.Component {
 
   render() {
     
-    return (<td id={this.props.id} className={this.state.color} onClick={(event) => {this.props.click(event); this.determineColor()}}></td>
+    return (<td id={this.props.id} className={this.state.color} onClick={(event) => {this.props.click(event); this.determineColor(event)}}></td>
   )}
 }
 
